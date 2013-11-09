@@ -27,6 +27,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user = current_user
+	@post.creation_time = Time.now
 
     respond_to do |format|
       if @post.save

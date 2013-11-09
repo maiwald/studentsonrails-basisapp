@@ -11,9 +11,16 @@
 </p>
 
 <p>
+  <strong>Date</strong>
+  <%= @post.creation_time.strftime("%d.%m.%Y %H:%M")  %>
+</p>
+
+<p>
   <strong>Author</strong>
   <%= @post.user.email %>
 </p>
+
+
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>
