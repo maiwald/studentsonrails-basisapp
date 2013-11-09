@@ -15,7 +15,7 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    @post = Post.new
+    @post = Post.new()
   end
 
   # GET /posts/1/edit
@@ -67,6 +67,7 @@ class PostsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
+      #raise params.inspect
       @post = Post.find(params[:id])
     end
 
