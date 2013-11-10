@@ -4,7 +4,7 @@ Basisapp::Application.routes.draw do
 
   devise_for :users
   resources :posts do
-    resources :comments
+    resources :comments, except: [:index, :show]
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,18 +1,6 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate_user!, except: [:index, :show]
-
-  # GET /comments
-  # GET /comments.json
-  def index
-    @comments = Comment.all
-    @post = Post.find(params['post_id'])
-  end
-
-  # GET /comments/1
-  # GET /comments/1.json
-  def show
-  end
+  before_action :set_comment, only: [:edit, :update, :destroy]
+  before_filter :authenticate_user!
 
   # GET /comments/new
   def new
@@ -28,13 +16,14 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
+    @post = Post.find(params['post_id'])
     @comment = Comment.new(comment_params)
     @comment.user = current_user
-    @comment.post_id = params['post_id']
+    @comment.post = @post
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to post_comments_path(params['post_id']), notice: 'Comment was successfully created.' }
+        format.html { redirect_to post_path(params['post_id']), notice: 'Comment was successfully created.' }
         format.json { render action: 'show', status: :created, location: @comment }
       else
         format.html { render action: 'new' }
@@ -48,7 +37,7 @@ class CommentsController < ApplicationController
   def update
     respond_to do |format|
       if @comment.update(comment_params)
-        format.html { redirect_to post_comments_path(params['post_id']), notice: 'Comment was successfully updated.' }
+        format.html { redirect_to post_path(params['post_id']), notice: 'Comment was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -62,7 +51,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
     respond_to do |format|
-      format.html { redirect_to Post.find(params['post_id'])}
+      format.html { redirect_to post_path(params['post_id'])}
       format.json { head :no_content }
     end
   end
