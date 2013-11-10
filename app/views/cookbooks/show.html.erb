@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Isbn:</strong>
+  <%= @cookbook.isbn %>
+</p>
+
+<p>
+  <strong>Author:</strong>
+  <%= @cookbook.author %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @cookbook.price %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @cookbook.title %>
+</p>
+
+<%= link_to 'Edit', edit_cookbook_path(@cookbook) %> |
+<%= link_to 'Back', cookbooks_path %>
