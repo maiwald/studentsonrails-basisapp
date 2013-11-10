@@ -3,6 +3,7 @@
 <table>
   <thead>
     <tr>
+      <th></th>
       <th>Isbn</th>
       <th>Author</th>
       <th>Price</th>
@@ -16,13 +17,14 @@
   <tbody>
     <% @cookbooks.each do |cookbook| %>
       <tr>
+        <td><%= cookbook.thumbnail %></td>
         <td><%= cookbook.isbn %></td>
         <td><%= cookbook.author %></td>
         <td><%= cookbook.price %></td>
         <td><%= cookbook.title %></td>
-        <td><%= link_to 'Show', cookbook %></td>
-        <td><%= link_to 'Edit', edit_cookbook_path(cookbook) %></td>
-        <td><%= link_to 'Destroy', cookbook, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', cookbook_path(cookbook.id) %></td>
+        <td><%= link_to 'Edit', edit_cookbook_path(cookbook.id) %></td>
+        <td><%= link_to 'Destroy', cookbook_path(cookbook.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

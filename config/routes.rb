@@ -1,4 +1,5 @@
 Basisapp::Application.routes.draw do
+  get '/search', to: 'cookbooks#search', as: 'search'
 
   
 

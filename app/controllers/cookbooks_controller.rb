@@ -1,25 +1,32 @@
 class CookbooksController < ApplicationController
   before_action :set_cookbook, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate_user!, except: [:index, :show]
+  before_filter :authenticate_user!, except: [:index, :show, :search]
 
   # GET /cookbooks
   # GET /cookbooks.json
   def index
-    @cookbooks = Cookbook.all
+    @cookbooks = CookbooksDecorator.decorate_collection(Cookbook.all)
   end
 
   # GET /cookbooks/1
   # GET /cookbooks/1.json
   def show
+
   end
 
   # GET /cookbooks/new
   def new
-    @cookbook = Cookbook.new
+    @cookbook = CookbooksDecorator.new(Cookbook.new)
   end
 
   # GET /cookbooks/1/edit
   def edit
+  end
+
+  def search
+    search_params = Array.new(3, "%#{params['q']}%")
+    @cookbooks = CookbooksDecorator.decorate_collection(Cookbook.where("isbn LIKE ? OR author LIKE ? OR title LIKE ?", *search_params))
+    render :index
   end
 
   # POST /cookbooks
@@ -65,7 +72,7 @@ class CookbooksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cookbook
-      @cookbook = Cookbook.find(params[:id])
+      @cookbook = CookbooksDecorator.new(Cookbook.find(params[:id]))
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
