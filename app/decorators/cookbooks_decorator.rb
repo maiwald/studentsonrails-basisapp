@@ -10,10 +10,10 @@ class CookbooksDecorator < Draper::Decorator
       nil
     end
   end
-  
+
   def initialize(*args)
     super(*args)
-    @gbook = GoogleBooks.search("isbn:#{isbn.gsub('-', '')}").first || NoGoogleBook.new
+    @gbook = GoogleBooks.search("isbn:#{isbn.try(:gsub, '-', '')}").first || NoGoogleBook.new
   end
 
   # Define presentation-specific methods here. Helpers are accessed through

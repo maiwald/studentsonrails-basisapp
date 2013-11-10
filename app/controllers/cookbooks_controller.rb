@@ -16,7 +16,7 @@ class CookbooksController < ApplicationController
 
   # GET /cookbooks/new
   def new
-    @cookbook = Cookbook.new
+    @cookbook = CookbooksDecorator.new(Cookbook.new)
   end
 
   # GET /cookbooks/1/edit
