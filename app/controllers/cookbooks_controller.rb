@@ -36,7 +36,7 @@ class CookbooksController < ApplicationController
 
     respond_to do |format|
       if @cookbook.save
-        format.html { redirect_to @cookbook, notice: 'Cookbook was successfully created.' }
+        format.html { redirect_to cookbook_path(@cookbook), notice: 'Cookbook was successfully created.' }
         format.json { render action: 'show', status: :created, location: @cookbook }
       else
         format.html { render action: 'new' }
@@ -50,7 +50,7 @@ class CookbooksController < ApplicationController
   def update
     respond_to do |format|
       if @cookbook.update(cookbook_params)
-        format.html { redirect_to @cookbook, notice: 'Cookbook was successfully updated.' }
+        format.html { redirect_to cookbook_path(@cookbook), notice: 'Cookbook was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
