@@ -16,9 +16,10 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
+    @post = Post.find(params['post_id'])
     @comment = Comment.new(comment_params)
     @comment.user = current_user
-    @comment.post_id = params['post_id']
+    @comment.post = @post
 
     respond_to do |format|
       if @comment.save
