@@ -1,6 +1,6 @@
 class CookbooksController < ApplicationController
   before_action :set_cookbook, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate_user!, except: [:index, :show]
+  before_filter :authenticate_user!, except: [:index, :show, :search]
 
   # GET /cookbooks
   # GET /cookbooks.json
@@ -20,6 +20,12 @@ class CookbooksController < ApplicationController
 
   # GET /cookbooks/1/edit
   def edit
+  end
+
+  def search
+    search_params = Array.new(3, "%#{params['q']}%")
+    @cookbooks = Cookbook.where("isbn LIKE ? OR author LIKE ? OR title LIKE ?", *search_params)
+    render :index
   end
 
   # POST /cookbooks
