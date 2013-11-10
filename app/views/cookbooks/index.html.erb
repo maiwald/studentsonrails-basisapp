@@ -3,6 +3,7 @@
 <table>
   <thead>
     <tr>
+      <th></th>
       <th>Isbn</th>
       <th>Author</th>
       <th>Price</th>
@@ -16,6 +17,7 @@
   <tbody>
     <% @cookbooks.each do |cookbook| %>
       <tr>
+        <td><%= cookbook_thumbnail cookbook %></td>
         <td><%= cookbook.isbn %></td>
         <td><%= cookbook.author %></td>
         <td><%= cookbook.price %></td>
