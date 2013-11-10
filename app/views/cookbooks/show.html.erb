@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 <p>
-  <%= cookbook_thumbnail(@cookbook) %>
+  <%= @cookbook.thumbnail %>
 </p>
 
 <p>
@@ -23,5 +23,9 @@
   <%= @cookbook.title %>
 </p>
 
+<p>
+  <strong>Description:</strong>
+  <%= @cookbook.description %>
+</p>
 <%= link_to 'Edit', edit_cookbook_path(@cookbook) %> |
 <%= link_to 'Back', cookbooks_path %>
