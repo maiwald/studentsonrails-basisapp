@@ -1,6 +1,10 @@
 Basisapp::Application.routes.draw do
 
-  resources :cookbooks
+  
+
+  resources :cookbooks do
+    resources :reviews, except: [:index, :show]
+  end
 
   devise_for :users
   resources :posts do

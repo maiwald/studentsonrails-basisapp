@@ -20,5 +20,20 @@
   <%= @cookbook.title %>
 </p>
 
+<div>
+	<h3>Reviews <%= @cookbook.average_rating %></h3>
+
+	<% @cookbook.reviews.each do |review| %>
+		<p>
+			<strong><%= review.rating %> - </strong><strong><%= review.title %></strong>
+			<div>
+				<%= review.content %>
+			</div>
+		</p>
+
+	<% end %>
+</div>
+
 <%= link_to 'Edit', edit_cookbook_path(@cookbook) %> |
 <%= link_to 'Back', cookbooks_path %>
+<%= link_to 'new Review', new_cookbook_review_path(@cookbook) %>
